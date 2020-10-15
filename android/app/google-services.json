@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "258386485373",
+    "firebase_url": "https://sbeepay.firebaseio.com",
+    "project_id": "sbeepay",
+    "storage_bucket": "sbeepay.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:258386485373:android:d50ffb5dd396d3e7f09114",
+        "android_client_info": {
+          "package_name": "com.stanleylab97.sbeepay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "258386485373-poou8uv46mpnnlqimpitq9ho1ln7s6p6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.stanleylab97.sbeepay",
+            "certificate_hash": "778e9aeb3ff4c6decda5db2b8de903d0003ef873"
+          }
+        },
+        {
+          "client_id": "258386485373-k9pgb6dh504sem99bkb1i6opl1iae69d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSciIVCi0hm7HPpnvm4kaTMjoAhhDfw0g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "258386485373-k9pgb6dh504sem99bkb1i6opl1iae69d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

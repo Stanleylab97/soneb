@@ -1,4 +1,4 @@
-package com.example.sbeepay
+package com.stanleylab97.sbeepay
 
 import io.flutter.embedding.android.FlutterActivity
 
