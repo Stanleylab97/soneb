@@ -1,4 +1,3 @@
-import 'package:sbeepay/config/palette.dart';
 import 'package:sbeepay/Pages/BottomNavScreen.dart';
 import 'package:sbeepay/Pages/Start.dart';
 import 'package:flutter/material.dart';

@@ -1,6 +1,7 @@
-import 'package:sbeepay/config/palette.dart';
+import 'package:clay_containers/widgets/clay_containers.dart';
 import 'package:sbeepay/config/styles.dart';
 import 'package:sbeepay/widgets/custom_app_bar.dart';
+import 'package:sbeepay/widgets/chart.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -10,22 +11,71 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
+  final data = [35.0, 60.0, 50.0, 40.0, 35.0, 55.0, 70.0, 40.0];
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return Scaffold(
         appBar: CustomAppBar(),
         body: SingleChildScrollView(
             child: Column(
           children: <Widget>[
             _buildHeader(screenHeight, context),
-            /* Container(height: MediaQuery.of(context).size.height * .1,
-           color: Colors.grey,
-           child: Image.asset("assets/images/logo.jpeg"),), */
-
+            SizedBox(height: 8),
+            Center(
+              child: Graphe(width: width, data: data),
+            ),
             _buildMessage(screenHeight)
           ],
         )));
+  }
+}
+
+class Graphe extends StatelessWidget {
+  const Graphe({
+    Key key,
+    @required this.width,
+    @required this.data,
+  }) : super(key: key);
+
+  final double width;
+  final List<double> data;
+
+  @override
+  Widget build(BuildContext context) {
+    return ClayContainer(
+      height: 300,
+      width: width * 0.8,
+      depth: 12,
+      spread: 8,
+      borderRadius: 16,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 16.0,
+              right: 16,
+              top: 26,
+            ),
+            child: Text(
+              "Evaluation de votre consommation",
+              style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black),
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Chart(
+            data: data,
+          ),
+        ],
+      ),
+    );
   }
 }
 
@@ -52,7 +102,7 @@ Widget _buildHeader(double screenHeight, BuildContext context) {
             )
           ],
         ),
-        SizedBox(height: screenHeight * 0.03),
+        SizedBox(height: screenHeight * 0.02),
         Column(
           children: <Widget>[
             Text('Société Béninoise d\'Energie Electrique',
