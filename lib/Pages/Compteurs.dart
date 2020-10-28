@@ -9,7 +9,7 @@ class Compteurs extends StatefulWidget {
 class _CompteursState extends State<Compteurs> {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    
     return Scaffold(
           body: SingleChildScrollView(
             scrollDirection: Axis.vertical,
