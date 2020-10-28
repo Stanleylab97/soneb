@@ -34,8 +34,8 @@ class MoMoRequests {
   }
 
   Future<http.Response> requestToPay(
-      String url, String refId, Map<String, String> body) async {
-    url = formater("/v1_0/requesttopay");
+       String refId, Map<String, String> body) async {
+   String url = formater("/v1_0/requesttopay");
     var token = getToken();
     await storage.write(key: "requesttopayToken", value: token.toString());
     var response = await http.post(

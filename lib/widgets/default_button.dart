@@ -1,4 +1,4 @@
-import 'package:sbeepay/config/Constant.dart';
+import 'package:sbeepay/config/constants.dart';
 import 'package:sbeepay/config/sizeConfig.dart';
 import 'package:flutter/material.dart';
 

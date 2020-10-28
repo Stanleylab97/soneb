@@ -11,6 +11,7 @@ import 'BottomNavScreen.dart';
 import 'SignUp.dart';
 
 class Login extends StatefulWidget {
+  static const routeName = "login";
   @override
   _LoginState createState() => _LoginState();
 }
@@ -37,90 +38,7 @@ class _LoginState extends State<Login> {
         "email": _email.text.trim(),
         "password": _password.text.trim()
       };
-      DataConnectionStatus status = await isConnected();
-      if (status == DataConnectionStatus.connected) {
-        var response = await networkHandler.post("/users/login", data);
-
-        if (response.statusCode == 200 || response.statusCode == 201) {
-          Map<String, dynamic> output = json.decode(response.body);
-
-          await storage.write(key: "token", value: output["token"]);
-
-          setState(() {
-            validate = true;
-            circular = false;
-          });
-          print('Login Ok');
-          Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                builder: (context) => BottomNavScreen(),
-              ),
-              (route) => false);
-        } else {
-          //Map<String, String> output = json.decode(response.body);
-          setState(() {
-            validate = false;
-            //errorText = output['status'];
-            circular = false;
-            print(response.statusCode);
-            print("Login Bad");
-          });
-        }
-      } else {
-        setState(() {
-          circular = false;
-        });
-        print("No internet");
-        Flushbar(
-            title: "Hey Ninja",
-            message:
-                "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
-            flushbarPosition: FlushbarPosition.TOP,
-            flushbarStyle: FlushbarStyle.FLOATING,
-            reverseAnimationCurve: Curves.decelerate,
-            forwardAnimationCurve: Curves.elasticOut,
-            backgroundColor: Colors.red,
-            boxShadows: [
-              BoxShadow(
-                  color: Colors.blue[800],
-                  offset: Offset(0.0, 2.0),
-                  blurRadius: 3.0)
-            ],
-            backgroundGradient:
-                LinearGradient(colors: [Colors.blueGrey, Colors.black]),
-            isDismissible: false,
-            duration: Duration(seconds: 4),
-            icon: Icon(
-              Icons.info_outline,
-              color: Colors.greenAccent,
-            ),
-            mainButton: FlatButton(
-              onPressed: () {},
-              child: Text(
-                "BAD",
-                style: TextStyle(color: Colors.amber),
-              ),
-            ),
-            showProgressIndicator: true,
-            progressIndicatorBackgroundColor: Colors.blueGrey,
-            titleText: Text(
-              "Connexion impossible",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20.0,
-                  color: Colors.yellow[600],
-                  fontFamily: "ShadowsIntoLightTwo"),
-            ),
-            messageText: Text(
-              "Vérifiez votre connexion internet!",
-              style: TextStyle(
-                  fontSize: 18.0,
-                  color: Colors.green,
-                  fontFamily: "ShadowsIntoLightTwo"),
-            ));
-      }
-    }
+         }
   }
 
   showError(String errormessage) {
@@ -170,11 +88,12 @@ class _LoginState extends State<Login> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-              Text("Veuillez entrer vos accès", style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold
-              ),)
-            ],),
+                Text(
+                  "Veuillez entrer vos accès",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                )
+              ],
+            ),
             Container(
               child: Form(
                 key: _formKey,
@@ -237,7 +156,14 @@ class _LoginState extends State<Login> {
                     SizedBox(height: 5),
                     RaisedButton(
                       padding: EdgeInsets.fromLTRB(70, 10, 70, 10),
-                      onPressed: login,
+                      onPressed: () {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => BottomNavScreen(),
+                            ),
+                            (route) => false);
+                      }, //login,
                       child: circular
                           ? CircularProgressIndicator()
                           : Text('Connexion',

@@ -11,7 +11,7 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  final data = [35.0, 60.0, 50.0, 40.0, 35.0, 55.0, 70.0, 40.0];
+  final data = [15.0, 25.0, 23.0, 35.0, 27.0, 18.0, 25.0, 21.0];
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;

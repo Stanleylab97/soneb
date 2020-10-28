@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'package:sbeepay/Pages/Auth/Welcome/components/body.dart';
 import 'package:sbeepay/Pages/BottomNavScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:sbeepay/Pages/Start.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -36,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
       });
     } else {
       setState(() {
-        page = Body();
+        page = Start();
       });
     }
   }

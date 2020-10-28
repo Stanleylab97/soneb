@@ -1,4 +1,5 @@
-import 'package:sbeepay/config/Constant.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:sbeepay/config/constants.dart';
 import 'package:sbeepay/config/palette.dart';
 import 'package:sbeepay/Pages/BottomNavScreen.dart';
 import 'package:flutter/material.dart';

@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:clay_containers/widgets/clay_containers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:http/http.dart';
+import 'package:sbeepay/Pages/BillsScreen.dart';
 import 'package:sbeepay/config/NetworkHandler.dart';
 
 class UnpaidBills extends StatefulWidget {
@@ -35,13 +37,13 @@ class _UnpaidBillsState extends State<UnpaidBills> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Liste des factures impayées: ",
+                "Liste des factures du compteur: ",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               )
             ]),
-            SizedBox(height: 20),
+        SizedBox(height: 20),
         Expanded(
-            child: StreamBuilder(
+          child: StreamBuilder(
             stream: _stream,
             builder: (BuildContext ctx, AsyncSnapshot snapshot) {
               if (snapshot.data == null) {
@@ -59,29 +61,54 @@ class _UnpaidBillsState extends State<UnpaidBills> {
               return ListView.builder(
                 itemCount: snapshot.data.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return Card(
-                    
-                    elevation: 2,
-                    child: Container(
-                      height: 150,
-                      padding: EdgeInsets.all(10),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              Icon(Icons.calendar_today),
-                              Text(snapshot.data[index]['userId'].toString() +
-                                  "\n" +
-                                  snapshot.data[index]['id'].toString() +
-                                  "\n" +
-                                  snapshot.data[index]['title'] +
-                                  "\n" +
-                                  snapshot.data[index]['body'])
-                            ],
-                          )
-                        ],
+                  return ListTile(
+                    leading: ClayContainer(
+                      width: 40,
+                      height: 40,
+                      borderRadius: 8,
+                      child: ShaderMask(
+                        shaderCallback: (Rect bounds) {
+                          return LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [
+                                Color(0x00000000),
+                                Color(0xFFB6BAA6),
+                              ]).createShader(bounds);
+                        },
+                        blendMode: BlendMode.srcATop,
+                        child: Icon(
+                          Icons.done,
+                          color: Colors.green[400],
+                          size: 30,
+                        ),
                       ),
                     ),
+                    title: Text(
+                      "Mois de Janvier",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                    subtitle: Text(
+                      "Consommation: 25 Kwh",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                    trailing: Text("3647 XOF",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                        )),
+                    onTap: () {
+                      setState(() {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => BillsScreen()),
+                        );
+                      });
+                    },
                   );
                 },
               );

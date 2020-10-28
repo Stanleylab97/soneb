@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sbeepay/Pages/BillsScreen.dart';
 import 'package:sbeepay/Pages/Panne.dart';
 import 'package:sbeepay/Pages/Unpaid.dart';
@@ -7,6 +9,8 @@ import 'DashboardScreen.dart';
 import 'Settings.dart';
 
 class BottomNavScreen extends StatefulWidget {
+
+ 
   @override
   _BottomNavScreenState createState() => _BottomNavScreenState();
 }
@@ -14,13 +18,13 @@ class BottomNavScreen extends StatefulWidget {
 class _BottomNavScreenState extends State<BottomNavScreen> {
   final List _screens = [
     UnpaidBills(),
-    BillsScreen(),
+    //BillsScreen(),
     DashboardScreen(),
-    PanneDeclaration(),
+    //PanneDeclaration(),
     Settings()
   ];
 
-  int _currentIndex = 2;
+  int _currentIndex = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -36,10 +40,10 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.grey,
         items: [
-          Icons.notifications,
-          Icons.info,
+          Icons.list,
+          // Icons.info,
           Icons.home,
-          Icons.bug_report,
+          // Icons.bug_report,
           Icons.settings
         ]
             .asMap()

@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:sbeepay/Pages/sign_in.dart';
 import 'package:sbeepay/config/palette.dart';
 import 'package:sbeepay/Pages/BottomNavScreen.dart';
 import 'package:flutter/material.dart';
@@ -9,98 +11,76 @@ import 'dart:async';
 import 'dart:convert' show json;
 import "package:http/http.dart" as http;
 
-GoogleSignIn _googleSignIn = GoogleSignIn(
-  scopes: <String>[
-    'email',
-    'https://www.googleapis.com/auth/contacts.userinfo',
-  ],
-);
-
 class Start extends StatefulWidget {
   @override
   _StartState createState() => _StartState();
 }
 
 class _StartState extends State<Start> {
-  GoogleSignInAccount _currentUser;
-  // ignore: unused_field
+  GoogleSignIn _googleSignIn = GoogleSignIn();
+  FirebaseAuth _auth;
+
+  bool isUserSignedIn = false;
+
   String _contactText;
 
   @override
   void initState() {
     super.initState();
-   
-    /*  try {
-        _googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount account) {
-          setState(() {
-          _currentUser = account;
-          });
-          if (_currentUser != null) {
-            _handleGetContact();
-          }
-      });
-        _googleSignIn.signInSilently(); 
-    } catch (e) {} */
+    checkIfUserIsSignedIn();
   }
 
-  Future<void> _handleGetContact() async {
+  void checkIfUserIsSignedIn() async {
+    var userSignedIn = await _googleSignIn.isSignedIn();
+
     setState(() {
-      _contactText = "Loading contact info...";
-    });
-    final http.Response response = await http.get(
-      'https://people.googleapis.com/v1/people/me/connections'
-      '?requestMask.includeField=person.emails',
-      headers: await _currentUser.authHeaders,
-    );
-    if (response.statusCode != 200) {
-      setState(() {
-        _contactText = "People API gave a ${response.statusCode} "
-            "response. Check logs for details.";
-      });
-      print('People API ${response.statusCode} response: ${response.body}');
-      return;
-    }
-    final Map<String, dynamic> data = json.decode(response.body);
-    final String namedContact = _pickFirstNamedContact(data);
-    setState(() {
-      if (namedContact != null) {
-        _contactText = "I see you now $namedContact!";
-      } else {
-        _contactText = "No contacts to display.";
-      }
+      isUserSignedIn = userSignedIn;
     });
   }
 
-  String _pickFirstNamedContact(Map<String, dynamic> data) {
-    final List<dynamic> connections = data['connections'];
-    final Map<String, dynamic> contact = connections?.firstWhere(
-      (dynamic contact) => contact['names'] != null,
-      orElse: () => null,
-    );
-    if (contact != null) {
-      final Map<String, dynamic> name = contact['names'].firstWhere(
-        (dynamic name) => name['displayName'] != null,
-        orElse: () => null,
+  Future<User> _handleSignIn() async {
+    User user;
+    bool userSignedIn = await _googleSignIn.isSignedIn();
+
+    setState(() {
+      isUserSignedIn = userSignedIn;
+    });
+
+    if (isUserSignedIn) {
+      user = _auth.currentUser;
+    } else {
+      final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
       );
-      if (name != null) {
-        return name['displayName'];
-      }
+
+      user = (await _auth.signInWithCredential(credential)).user;
+      userSignedIn = await _googleSignIn.isSignedIn();
+      setState(() {
+        isUserSignedIn = userSignedIn;
+      });
     }
-    return null;
+
+    return user;
   }
 
-  Future<void> _handleSignIn() async {
-    try {
-      await _googleSignIn.signIn();
-    } catch (error) {
-      print(error);
-    }
+  void onGoogleSignIn(BuildContext context) async {
+    User user = await _handleSignIn();
+    var userSignedIn = await Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => BottomNavScreen()),
+    );
+
+    setState(() {
+      isUserSignedIn = userSignedIn == null ? true : false;
+    });
   }
 
-  navigateToDashboard() async {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => BottomNavScreen()));
-  }
 
   navigateToLogin() async {
     Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
@@ -112,90 +92,85 @@ class _StartState extends State<Start> {
 
   @override
   Widget build(BuildContext context) {
-    
-          return Scaffold(
-            body:Container(
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      height: 400,
-                      child: Image(
-                        image: AssetImage("assets/images/start.jpg"),
-                        fit: BoxFit.contain,
+    return Scaffold(
+      body: Container(
+        child: Column(
+          children: <Widget>[
+            Container(
+              height: 400,
+              child: Image(
+                image: AssetImage("assets/images/start.jpg"),
+                fit: BoxFit.contain,
+              ),
+            ),
+            SizedBox(height: 1),
+            RichText(
+                text: TextSpan(
+                    text: 'Bienvenue sur ',
+                    style: TextStyle(
+                        fontSize: 25.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),
+                    children: <TextSpan>[
+                  TextSpan(
+                      text: 'SBEEPAY',
+                      style: TextStyle(
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red))
+                ])),
+            SizedBox(height: 10.0),
+            Text(
+              'L\'application qui fait gagner du temps',
+              style: TextStyle(color: Colors.black),
+            ),
+            SizedBox(height: 20.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                RaisedButton(
+                    padding: EdgeInsets.only(left: 30, right: 30),
+                    onPressed: navigateToLogin,
+                    child: Text(
+                      'Connexion',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
                       ),
                     ),
-                    SizedBox(height: 1),
-                    RichText(
-                        text: TextSpan(
-                            text: 'Bienvenue sur ',
-                            style: TextStyle(
-                                fontSize: 25.0,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black),
-                            children: <TextSpan>[
-                          TextSpan(
-                              text: 'SBEEPAY',
-                              style: TextStyle(
-                                  fontSize: 30.0,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.red))
-                        ])),
-                    SizedBox(height: 10.0),
-                    Text(
-                      'L\'application qui fait gagner du temps',
-                      style: TextStyle(color: Colors.black),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
-                    SizedBox(height: 20.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        RaisedButton(
-                            padding: EdgeInsets.only(left: 30, right: 30),
-                            onPressed: navigateToLogin,
-                            child: Text(
-                              'Connexion',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            color: Colors.green[500]),
-                        SizedBox(width: 20.0),
-                        RaisedButton(
-                            padding: EdgeInsets.only(left: 30, right: 30),
-                            onPressed: navigateToRegister,
-                            child: Text(
-                              'S\'enregistrer',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            color: Colors.blue[400]),
-                      ],
+                    color: Colors.green[500]),
+                SizedBox(width: 20.0),
+                RaisedButton(
+                    padding: EdgeInsets.only(left: 30, right: 30),
+                    onPressed: navigateToRegister,
+                    child: Text(
+                      'S\'enregistrer',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                     ),
-                    SizedBox(height: 25.0),
-                    /* SignInButton(
-                Buttons.Google,
-                text: "Se connecter avec Google",
-                onPressed: () {
-                  _handleSignIn();
-                },
-                elevation: 8.0,
-              ) */
-                  ],
-                ),
-              ),
-            );
-          
-       
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    color: Colors.blue[400]),
+              ],
+            ),
+            SizedBox(height: 25.0),
+            SignInButton(
+              Buttons.Google,
+              text: "Se connecter avec Google",
+              onPressed:() {onGoogleSignIn(context);},
+              elevation: 8.0,
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

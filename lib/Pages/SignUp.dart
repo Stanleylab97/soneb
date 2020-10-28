@@ -1,5 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sbeepay/config/NetworkHandler.dart';
-import 'package:sbeepay/config/palette.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -221,6 +221,46 @@ class _SignUpState extends State<SignUp> {
                     ),
                     Container(
                       child: TextFormField(
+                        controller: _tel,
+                        validator: (inputTel) {
+                          if (inputTel.isEmpty) return 'Compteur';
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                          labelText: 'N° Compteur',
+                          prefixIcon: Icon(Icons.format_list_numbered_rtl),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.black,
+                              width: 2,
+                            ),
+                          ),
+                        ),
+                        //onSaved: (input) => _tel = input
+                      ),
+                    ),
+                    Container(
+                      child: TextFormField(
+                        controller: _tel,
+                        validator: (inputTel) {
+                          if (inputTel.isEmpty) return 'Abonné';
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                          labelText: 'N° Abonné',
+                          prefixIcon: Icon(Icons.verified_user),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.black,
+                              width: 2,
+                            ),
+                          ),
+                        ),
+                        //onSaved: (input) => _tel = input
+                      ),
+                    ),
+                    Container(
+                      child: TextFormField(
                         controller: _password,
                         validator: (inputPass) {
                           if (inputPass.length < 6)
@@ -287,7 +327,14 @@ class _SignUpState extends State<SignUp> {
                     SizedBox(height: 20),
                     RaisedButton(
                       padding: EdgeInsets.fromLTRB(70, 10, 70, 10),
-                      onPressed: signUp,
+                      onPressed: () {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => BottomNavScreen(),
+                            ),
+                            (route) => false);
+                      },
                       child: circular
                           ? CircularProgressIndicator()
                           : Text('Enregistrer',
@@ -295,7 +342,7 @@ class _SignUpState extends State<SignUp> {
                                   color: Colors.white,
                                   fontSize: 20.0,
                                   fontWeight: FontWeight.bold)),
-                      color: Palette.primaryColor,
+                      color: Colors.red,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
