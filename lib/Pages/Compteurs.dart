@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sbeepay/config/constants.dart';
 
 class Compteurs extends StatefulWidget {
   static const routeName = "compteurs";
@@ -7,12 +8,13 @@ class Compteurs extends StatefulWidget {
 }
 
 class _CompteursState extends State<Compteurs> {
+  TextEditingController _abonne = TextEditingController();
+  TextEditingController _police = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
-          body: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
         child: Container(
           height: MediaQuery.of(context).size.height,
           padding: const EdgeInsets.only(
@@ -35,7 +37,6 @@ class _CompteursState extends State<Compteurs> {
                   cardExpiration: "AB13780",
                   cardHolder: "John DOE",
                   cardNumber: "HE 68345"),
-                  
               SizedBox(
                 height: 15,
               ),
@@ -44,10 +45,9 @@ class _CompteursState extends State<Compteurs> {
                   cardExpiration: "AB53710",
                   cardHolder: "John DOE",
                   cardNumber: "TK 29345"),
-                   SizedBox(
+              SizedBox(
                 height: 15,
               ),
-            
               _buildAddCardButton(
                 icon: Icon(Icons.add),
                 color: Colors.red,
@@ -70,7 +70,10 @@ class _CompteursState extends State<Compteurs> {
           child: Text(
             '$title',
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold,color: Colors.black54),
+            style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                color: Colors.black54),
           ),
         ),
       ],
@@ -173,12 +176,50 @@ class _CompteursState extends State<Compteurs> {
       child: FloatingActionButton(
         elevation: 8.0,
         onPressed: () {
-          print("Add a credit card");
+          _displayDialog(context);
         },
         backgroundColor: color,
         mini: false,
         child: icon,
       ),
     );
+  }
+
+  _displayDialog(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Veuillez entrer vos références',
+                textAlign: TextAlign.center),
+            content: Container(
+              height: 100,
+              child: Column(
+                children: [
+                  TextField(
+                    controller: _police,
+                    textInputAction: TextInputAction.go,
+                    keyboardType: TextInputType.numberWithOptions(),
+                    decoration: InputDecoration(hintText: "Numéro police: XXXXXXX"),
+                  ),
+                  TextField(
+                    controller: _abonne,
+                    textInputAction: TextInputAction.go,
+                    keyboardType: TextInputType.numberWithOptions(),
+                    decoration: InputDecoration(hintText: "Numéro abonné: ABXXXXX"),
+                  ),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text('Ajouter'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        });
   }
 }
