@@ -1,6 +1,7 @@
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:flushbar/flushbar.dart';
 import "package:flutter/material.dart";
+import 'package:sbeepay/Models/facture.dart';
 import 'package:sbeepay/Pages/PaymentsMethods.dart';
 import 'package:sbeepay/Pages/screens.dart';
 import 'package:sbeepay/config/MoMoRequests.dart';
@@ -9,10 +10,12 @@ import 'package:sbeepay/config/constants.dart';
 import 'package:uuid/uuid.dart';
 
 class InvoiceBody extends StatelessWidget {
-  
+  final Facture facturedetails;
+
+  InvoiceBody({this.facturedetails});
   @override
   Widget build(BuildContext context) {
-    var totalAmount = 6574;
+    var totalAmount = facturedetails.montantFact;
     double height =
         ScreenConfig.deviceHeight - ScreenConfig.getProportionalHeight(374);
     return Container(
@@ -29,7 +32,7 @@ class InvoiceBody extends StatelessWidget {
             Card(
               elevation: 1,
               child: Column(
-                children: [titre1(), SousDetail1("GD22788", 6574)],
+                children: [titre1(), SousDetail1(facturedetails.compteur.numPolice, int.parse(facturedetails.montantFact) )],
               ),
             ),
             SizedBox(
@@ -38,13 +41,13 @@ class InvoiceBody extends StatelessWidget {
             Card(
               elevation: 1,
               child: Column(
-                children: [titre2(), SousDetail2(1158, 1274, 24, "B09")],
+                children: [titre2(), SousDetail2(facturedetails.lastIndex, facturedetails.newIndex, facturedetails.nbkwh, "B09")],
               ),
             ),
             SizedBox(
               height: ScreenConfig.getProportionalHeight(4),
             ),
-            invoiceTotal(totalAmount),
+            invoiceTotal(int.parse(facturedetails.montantFact)),
             SizedBox(
               height: ScreenConfig.getProportionalHeight(56),
             ),
@@ -84,7 +87,7 @@ class InvoiceBody extends StatelessWidget {
             SizedBox(
               height: ScreenConfig.getProportionalHeight(37),
             ),
-            Text("A payer avant le: 18/10/2020")
+            Text("A payer avant le: "+facturedetails.periode.dateEcheance)
           ],
         ),
       ),

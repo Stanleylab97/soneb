@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:sbeepay/Models/facture.dart';
 import 'package:sbeepay/config/constants.dart';
 import 'package:sbeepay/widgets/invoice_body.dart';
 
 class BillsScreen extends StatefulWidget {
+  final Facture facture;
+
+  BillsScreen({this.facture});
+
   @override
   _BillsScreenState createState() => _BillsScreenState();
 }
@@ -14,7 +19,7 @@ class _BillsScreenState extends State<BillsScreen> {
 
     return Scaffold(
       body: Column(
-        children: [invoiceHeader(), InvoiceBody()],
+        children: [invoiceHeader(), InvoiceBody(facturedetails: facture)],
       ),
     );
   }
@@ -28,7 +33,6 @@ class _BillsScreenState extends State<BillsScreen> {
         padding: EdgeInsets.all(10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          
           children: [
             SizedBox(height: ScreenConfig.getProportionalHeight(60)),
             Row(
@@ -47,45 +51,43 @@ class _BillsScreenState extends State<BillsScreen> {
               ],
             ),
             SizedBox(height: ScreenConfig.getProportionalHeight(35)),
-            Row(mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("Facture n° FE 594211224256",style: TextStyle(fontSize: 16),),
-            ],),
-            
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Facture n° FE "+ widget.facture.numFact,
+                  style: TextStyle(fontSize: 16),
+                ),
+              ],
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "Abonné",
-                      style:TextStyle(fontWeight: FontWeight.bold, fontSize: 18)
-                      
-                    ),
+                    Text("Abonné",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18)),
                     SizedBox(
                       height: 2,
                     ),
                     Text(
-                      "Numéro Abonné: 787788",
+                      "Numéro Abonné: "+widget.facture.compteur.abonne.numAbonne,
                     ),
                     SizedBox(
                       height: 2,
                     ),
-                    Text("Catégorie: 01 Particulier")
+                    Text("Catégorie: 01 "+widget.facture.compteur.abonne.category.libelle)
                   ],
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                   
                     SizedBox(
-                      height:42,
+                      height: 42,
                     ),
-                    
-                   
-                    Text("Client: DOSSOU Luc")
+                    Text("Client: "+widget.facture.compteur.abonne.nom)
                   ],
                 ),
               ],
@@ -98,8 +100,6 @@ class _BillsScreenState extends State<BillsScreen> {
           ],
         ));
   }
-
-
 
   Text topHeaderText(String label) {
     return Text(label,

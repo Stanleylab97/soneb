@@ -5,6 +5,11 @@ import 'package:clay_containers/widgets/clay_containers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:http/http.dart';
+import 'package:sbeepay/Models/abonne.dart';
+import 'package:sbeepay/Models/category.dart';
+import 'package:sbeepay/Models/compteur.dart';
+import 'package:sbeepay/Models/facture.dart';
+import 'package:sbeepay/Models/period.dart';
 import 'package:sbeepay/Pages/BillsScreen.dart';
 import 'package:sbeepay/config/NetworkHandler.dart';
 
@@ -61,6 +66,8 @@ class _UnpaidBillsState extends State<UnpaidBills> {
               return ListView.builder(
                 itemCount: snapshot.data.length,
                 itemBuilder: (BuildContext context, int index) {
+                  print(snapshot.data);
+                  var facture = Facture(snapshot.data[index]['numFact'],Periode(snapshot.data[index]['periode']['periodFact'],snapshot.data[index]['periode']['dateEcheance']),snapshot.data[index]['lastIndex'],snapshot.data[index]['newIndex'],snapshot.data[index]['nbkwh'],snapshot.data[index]['montantFact'],Compteur(snapshot.data[index]['compteur']['numPolice'],snapshot.data[index]['compteur']['carre'] ,Abonne(snapshot.data[index]['compteur']['abonne']['numAbonne'],snapshot.data[index]['compteur']['abonne']['nom'],snapshot.data[index]['compteur']['abonne']['tel'],snapshot.data[index]['compteur']['abonne']['adresse'], Categorie(snapshot.data[index]['compteur']['abonne']['categorie']['libelle']))));
                   return ListTile(
                     leading: ClayContainer(
                       width: 40,
@@ -85,18 +92,18 @@ class _UnpaidBillsState extends State<UnpaidBills> {
                       ),
                     ),
                     title: Text(
-                      "Mois de Janvier",
+                      facture.numFact,
                       style: TextStyle(
                         fontWeight: FontWeight.w900,
                       ),
                     ),
                     subtitle: Text(
-                      "Consommation: 25 Kwh",
+                      "Consommation: "+ facture.nbkwh.toString() +" Kwh",
                       style: TextStyle(
                         fontWeight: FontWeight.w300,
                       ),
                     ),
-                    trailing: Text("3647 XOF",
+                    trailing: Text(facture.montantFact+" XOF",
                         style: TextStyle(
                           fontWeight: FontWeight.w900,
                         )),
@@ -105,7 +112,7 @@ class _UnpaidBillsState extends State<UnpaidBills> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => BillsScreen()),
+                              builder: (context) => BillsScreen(facture:facture)),
                         );
                       });
                     },
@@ -121,7 +128,7 @@ class _UnpaidBillsState extends State<UnpaidBills> {
 
   _getUnpaids() async {
     _streamController.add("waiting");
-    Response response = await networkHandler.get("");
+    Response response = await networkHandler.get("/easier/factures");
     _streamController.add(json.decode(response.body));
   }
 }

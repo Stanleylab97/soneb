@@ -7,7 +7,7 @@ import 'package:logger/logger.dart';
 
 class NetworkHandler {
   String baseurl =
-      "https://jsonplaceholder.typicode.com/posts"; 
+      "https://easier.donaconsult.com"; 
   var log = Logger();
 
   FlutterSecureStorage storage = FlutterSecureStorage();
@@ -15,7 +15,7 @@ class NetworkHandler {
   Future get(String url) async {
     // String token = await storage.read(key: "token");
     url = formater(url);
-    var response = await http.get(url); //,headers: {"Authorization": "Bearer $token"},
+    var response = await http.get(url, headers: {"Accept": "application/json"}); //,headers: {"Authorization": "Bearer $token"},
     return response;
   }
    

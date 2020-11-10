@@ -13,9 +13,89 @@ class _PaymentsMethodsState extends State<PaymentsMethods> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        body: SafeArea(
+            top: true,
+            right: true,
+            left: true,
+            child: Column(children: [
+              Container(
+                height: 50.0,
+                decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                  BoxShadow(color: Colors.grey, spreadRadius: 1, blurRadius: 1)
+                ]),
+                child: Row(children: <Widget>[
+                  Flexible(
+                      child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                        Icon(Icons.arrow_back_ios,
+                            size: 18, color: Colors.orange),
+                        Text('Retour',
+                            style: TextStyle(
+                                fontSize: 16.0,
+                                color: Colors.orange,
+                                fontWeight: FontWeight.w600))
+                      ])),
+                  Flexible(
+                      child: Text(
+                    'Paiement',
+                    style: TextStyle(
+                        fontSize: 16.0,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.start,
+                  )),
+                ]),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Flexible(
+                fit: FlexFit.tight,
+                child: Column(children: <Widget>[
+                  Flexible(
+                      flex: 2,
+                      child: Row(
+
+                        children: [
+                          Flexible(
+                            child: Image.asset(
+                              "assets/images/mtn.jpeg",
+                               fit: BoxFit.fill
+                            ),
+                          ),
+                          Flexible(
+                            child: Image.asset(
+                              "assets/images/moov.jpg",
+                              width: 120, height: 90, fit: BoxFit.fill
+                            ),
+                          ),
+                        ],
+                      )),
+                  Flexible(
+                      flex: 2,
+                      child: Center(
+                          child: Image.asset(
+                        "assets/images/moov.jpg",
+                        fit: BoxFit.fitWidth,
+                      ))),
+                  Flexible(
+                      flex: 2,
+                      child: Center(
+                          child: Image.asset(
+                        "assets/images/moov.jpg",
+                        fit: BoxFit.fitWidth,
+                      ))),
+                ]),
+              )
+            ])));
+    /* Scaffold(
         body: Container(
+          height:ScreenConfig.getProportionalHeight(800) ,
       padding: EdgeInsets.all(20),
-      child: Column(children: [
+      child: Column(
+        
+        children: [
         SizedBox(
           height: ScreenConfig.getProportionalHeight(120),
         ),
@@ -29,52 +109,97 @@ class _PaymentsMethodsState extends State<PaymentsMethods> {
               textAlign: TextAlign.center,
             ),
             SizedBox(
-              height: ScreenConfig.getProportionalHeight(120),
+              height: ScreenConfig.getProportionalHeight(60),
             ),
-            InkWell(
-              onTap: () {
-                _displayDialog(context,1);
-              },
-              child: Container(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20.0),
-                  child: Image.asset("assets/images/mtn.jpeg",
-                      width: 300, height: 150, fit: BoxFit.fill),
-                ),
-              ),
+            Text(
+              "Réseaux GSM",
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
             ),
             SizedBox(
-              height: ScreenConfig.getProportionalHeight(20),
+              height: ScreenConfig.getProportionalHeight(60),
             ),
-            InkWell(
+            Row(
+              children: [
+                InkWell(
+                  onTap: () {
+                    _displayDialog(context, 1);
+                  },
+                  child: Container(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20.0),
+                      child: Image.asset("assets/images/mtn.jpeg",
+                          width: 120, height: 90, fit: BoxFit.fill),
+                    ),
+                  ),
+                ),
+                InkWell(
               onTap: () {
-                _displayDialog(context,2);
+                _displayDialog(context, 2);
               },
               child: Container(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20.0),
                   child: Image.asset("assets/images/moov.jpg",
-                      width: 300, height: 150, fit: BoxFit.fill),
+                      width: 120, height: 90, fit: BoxFit.fill),
                 ),
               ),
             ),
+              ],
+            ),
             SizedBox(
-              height: ScreenConfig.getProportionalHeight(20),
+              height: ScreenConfig.getProportionalHeight(60),
+            ),
+            Text(
+              "Banques affiliées",
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(
+              height: ScreenConfig.getProportionalHeight(60),
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+              InkWell(
+              onTap: () {},
+              child: Container(
+                height: 90,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20.0),
+                  child: Image.asset("assets/images/boa.jpg",
+                      width: 120, fit: BoxFit.fill),
+                ),
+              ),
             ),
             InkWell(
               onTap: () {},
               child: Container(
+                height: 90,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20.0),
-                  child: Image.asset("assets/images/boa.jpg",
-                      width: 300, height: 150, fit: BoxFit.fill),
+                  child: Image.asset("assets/images/uba.png",
+                      width: 120, fit: BoxFit.fill),
                 ),
               ),
             ),
+            InkWell(
+              onTap: () {},
+              child: Container(
+                height: 90,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20.0),
+                  child: Image.asset("assets/images/ecobank.jpg",
+                      width: 120, fit: BoxFit.fill),
+                ),
+              ),
+            ),
+            ],),
+            
           ],
         ),
       ]),
-    ));
+    )); */
   }
 
   _displayDialog(BuildContext context, int i) async {
