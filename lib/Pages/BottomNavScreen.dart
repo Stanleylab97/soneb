@@ -1,16 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:sbeepay/Pages/BillsScreen.dart';
-import 'package:sbeepay/Pages/Panne.dart';
-import 'package:sbeepay/Pages/Unpaid.dart';
+import 'package:sonebpay/Pages/BillsScreen.dart';
+import 'package:sonebpay/Pages/Panne.dart';
+import 'package:sonebpay/Pages/Unpaid.dart';
 
 import 'DashboardScreen.dart';
 import 'Settings.dart';
 
 class BottomNavScreen extends StatefulWidget {
-
- 
   @override
   _BottomNavScreenState createState() => _BottomNavScreenState();
 }
@@ -56,7 +54,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
                           vertical: 6.0, horizontal: 16.0),
                       decoration: BoxDecoration(
                         color: _currentIndex == key
-                            ? Colors.red
+                            ? Color.fromRGBO(0, 91, 171, 1)
                             : Colors.transparent,
                         borderRadius: BorderRadius.circular(20.0),
                       ),

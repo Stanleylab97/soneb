@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-import 'package:sbeepay/Pages/Compteurs.dart';
-import 'package:sbeepay/config/constants.dart';
+import 'package:sonebpay/Pages/Compteurs.dart';
+import 'package:sonebpay/config/constants.dart';
 
 class ProfileListItem extends StatelessWidget {
   final IconData icon;
@@ -32,15 +32,13 @@ class ProfileListItem extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(kSpacingUnit.w * 3),
-        color: Colors.red,
+        color: Color.fromRGBO(0, 91, 171, 1),
       ),
       child: InkWell(
         onTap: () {
           if (typeButton == 1) {
             Navigator.pushNamed(context, Compteurs.routeName);
-          } else if (typeButton == 2) {
-
-          }
+          } else if (typeButton == 2) {}
         },
         child: Row(
           children: <Widget>[

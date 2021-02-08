@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'package:sbeepay/Pages/BottomNavScreen.dart';
+import 'package:sonebpay/Pages/BottomNavScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:sbeepay/Pages/Start.dart';
+import 'package:sonebpay/Pages/Start.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
     String token = await storage.read(key: "token");
     if (token != null) {
       setState(() {
-        page =  BottomNavScreen();
+        page = BottomNavScreen();
       });
     } else {
       setState(() {
@@ -68,12 +68,14 @@ class _SplashScreenState extends State<SplashScreen> {
                       itemBuilder: (BuildContext context, int index) {
                     return DecoratedBox(
                       decoration: BoxDecoration(
-                        color: index.isEven ? Colors.red : Colors.grey,
+                        color: index.isEven
+                            ? Color.fromRGBO(0, 91, 171, 1)
+                            : Color.fromRGBO(205, 126, 80, 1),
                       ),
                     );
                   }),
                   SizedBox(height: 50.0),
-                  Text("Powered by StanleyLab",
+                  Text("Powered by ALL PAY",
                       style: TextStyle(
                           fontStyle: FontStyle.italic,
                           fontSize: 16,
@@ -89,7 +91,7 @@ class _SplashScreenState extends State<SplashScreen> {
 class MyImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    AssetImage image = new AssetImage("assets/images/logo.jpeg");
+    AssetImage image = new AssetImage("assets/images/logo.jpg");
     Image logo = new Image(image: image, width: 200, height: 200);
     return logo;
   }

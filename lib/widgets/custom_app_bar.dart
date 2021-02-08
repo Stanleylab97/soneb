@@ -1,12 +1,12 @@
-import 'package:sbeepay/Pages/BottomNavScreen.dart';
-import 'package:sbeepay/Pages/Start.dart';
+import 'package:sonebpay/Pages/BottomNavScreen.dart';
+import 'package:sonebpay/Pages/Start.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.red,
+      backgroundColor: Color.fromRGBO(0, 91, 171, 1),
       elevation: 0.0,
       leading: IconButton(
           icon: const Icon(Icons.menu),
@@ -18,7 +18,8 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
         IconButton(
             icon: const Icon(Icons.exit_to_app),
             onPressed: () {
-               Navigator.push(context, MaterialPageRoute(builder: (context) => Start()));
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Start()));
             }),
       ],
     );

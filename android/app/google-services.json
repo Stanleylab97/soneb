@@ -1,16 +1,16 @@
 {
   "project_info": {
     "project_number": "258386485373",
-    "firebase_url": "https://sbeepay.firebaseio.com",
-    "project_id": "sbeepay",
-    "storage_bucket": "sbeepay.appspot.com"
+    "firebase_url": "https://sonebpay.firebaseio.com",
+    "project_id": "sonebpay",
+    "storage_bucket": "sonebpay.appspot.com"
   },
   "client": [
     {
       "client_info": {
         "mobilesdk_app_id": "1:258386485373:android:ea5e4932c8383093f09114",
         "android_client_info": {
-          "package_name": "com.stanleylab97.sbeepay"
+          "package_name": "com.stanleylab97.sonebpay"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "258386485373-2olmkctguije8u18t2cjkgq37g8vu2rt.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.stanleylab97.sbeepay",
+            "package_name": "com.stanleylab97.sonebpay",
             "certificate_hash": "b37afbd725cabf53379f6adac1dbf0b5709aa22f"
           }
         },

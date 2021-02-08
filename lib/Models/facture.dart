@@ -1,4 +1,4 @@
-import 'package:sbeepay/Models/period.dart';
+import 'package:sonebpay/Models/period.dart';
 
 import 'compteur.dart';
 
@@ -9,5 +9,6 @@ class Facture {
   Periode periode;
   Compteur compteur;
 
-  Facture(this.numFact,this.periode, this.lastIndex, this.newIndex, this.nbkwh, this.montantFact, this.compteur);
+  Facture(this.numFact, this.periode, this.lastIndex, this.newIndex, this.nbkwh,
+      this.montantFact, this.compteur);
 }

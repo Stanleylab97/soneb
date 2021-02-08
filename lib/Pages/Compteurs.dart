@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sbeepay/config/constants.dart';
+import 'package:sonebpay/config/constants.dart';
 
 class Compteurs extends StatefulWidget {
   static const routeName = "compteurs";
@@ -50,7 +50,7 @@ class _CompteursState extends State<Compteurs> {
               ),
               _buildAddCardButton(
                 icon: Icon(Icons.add),
-                color: Colors.red,
+                color: Color.fromRGBO(0, 91, 171, 1),
               )
             ],
           ),
@@ -200,13 +200,15 @@ class _CompteursState extends State<Compteurs> {
                     controller: _police,
                     textInputAction: TextInputAction.go,
                     keyboardType: TextInputType.numberWithOptions(),
-                    decoration: InputDecoration(hintText: "Numéro police: XXXXXXX"),
+                    decoration:
+                        InputDecoration(hintText: "Numéro police: XXXXXXX"),
                   ),
                   TextField(
                     controller: _abonne,
                     textInputAction: TextInputAction.go,
                     keyboardType: TextInputType.numberWithOptions(),
-                    decoration: InputDecoration(hintText: "Numéro abonné: ABXXXXX"),
+                    decoration:
+                        InputDecoration(hintText: "Numéro abonné: ABXXXXX"),
                   ),
                 ],
               ),

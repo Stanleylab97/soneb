@@ -1,7 +1,7 @@
 import 'package:clay_containers/widgets/clay_containers.dart';
-import 'package:sbeepay/config/styles.dart';
-import 'package:sbeepay/widgets/custom_app_bar.dart';
-import 'package:sbeepay/widgets/chart.dart';
+import 'package:sonebpay/config/styles.dart';
+import 'package:sonebpay/widgets/custom_app_bar.dart';
+import 'package:sonebpay/widgets/chart.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -84,7 +84,7 @@ Widget _buildHeader(double screenHeight, BuildContext context) {
       child: Container(
     padding: const EdgeInsets.all(20.0),
     decoration: BoxDecoration(
-        color: Colors.red,
+        color: Color.fromRGBO(0, 91, 171, 1),
         borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(40.0),
             bottomRight: Radius.circular(40.0))),
@@ -94,7 +94,7 @@ Widget _buildHeader(double screenHeight, BuildContext context) {
         Row(
           children: <Widget>[
             Text(
-              "Bienvenue",
+              "Bienvenue à la SONEB",
               style: const TextStyle(
                   color: Colors.white,
                   fontSize: 25.0,
@@ -105,21 +105,15 @@ Widget _buildHeader(double screenHeight, BuildContext context) {
         SizedBox(height: screenHeight * 0.02),
         Column(
           children: <Widget>[
-            Text('Société Béninoise d\'Energie Electrique',
+            Text('Société Nationale des Eaux du Bénin',
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 18.0,
                   fontWeight: FontWeight.w600,
                 )),
-            SizedBox(height: screenHeight * 0.01),
-            Text('Les Experts en fourniture d\'Electricté',
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 16.0,
-                )),
             SizedBox(height: screenHeight * 0.03),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
                 FlatButton.icon(
                     padding: const EdgeInsets.symmetric(
@@ -131,22 +125,7 @@ Widget _buildHeader(double screenHeight, BuildContext context) {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0)),
                     icon: const Icon(Icons.call),
-                    label: Text("Appeler", style: Styles.buttonTextStyle),
-                    textColor: Colors.white),
-                FlatButton.icon(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10.0, horizontal: 20.0),
-                    onPressed: () {
-                      //Navigator.push(context,MaterialPageRoute(builder: (context) => AlertScreen()));
-                    },
-                    color: Colors.blue,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50.0)),
-                    icon: const Icon(
-                      Icons.notifications_active,
-                      color: Colors.yellow,
-                    ),
-                    label: Text("Alertez-nous", style: Styles.buttonTextStyle),
+                    label: Text("Dépannage", style: Styles.buttonTextStyle),
                     textColor: Colors.white),
               ],
             )
@@ -167,7 +146,10 @@ Widget _buildMessage(double screenHeight) {
     padding: const EdgeInsets.all(10.0),
     height: screenHeight * 0.15,
     decoration: BoxDecoration(
-        gradient: LinearGradient(colors: [Colors.yellow, Colors.red]),
+        gradient: LinearGradient(colors: [
+          Color.fromRGBO(0, 91, 171, 1),
+          Color.fromRGBO(97, 199, 242, 1)
+        ]),
         borderRadius: BorderRadius.circular(20.0)),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -180,7 +162,7 @@ Widget _buildMessage(double screenHeight) {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text("La SBEE",
+            Text("La SONEB",
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 18.0,

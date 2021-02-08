@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:sbeepay/Pages/Compteurs.dart';
+import 'package:sonebpay/Pages/Compteurs.dart';
 
 import 'Pages/SplashScreen.dart';
 
@@ -15,15 +15,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'SBEEPAY',
+      title: 'SONEBPAY',
       debugShowCheckedModeBanner: false,
-       routes: {
-        Compteurs.routeName: (context)=>Compteurs(),
-       },
+      routes: {
+        Compteurs.routeName: (context) => Compteurs(),
+      },
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        iconTheme: IconThemeData(size: 36.0, color: Colors.red),
+        iconTheme:
+            IconThemeData(size: 36.0, color: Color.fromRGBO(0, 91, 171, 1)),
       ),
       home: SplashScreen(),
     );

@@ -6,7 +6,7 @@
     "configurations": [
         
         {
-            "name": "sbeepay",
+            "name": "sonebpay",
             "request": "launch",
             "type": "dart"
         }

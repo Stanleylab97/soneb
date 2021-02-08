@@ -2,8 +2,8 @@ import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-import 'package:sbeepay/config/constants.dart';
-import 'package:sbeepay/widgets/profile_list_item.dart';
+import 'package:sonebpay/config/constants.dart';
+import 'package:sonebpay/widgets/profile_list_item.dart';
 
 class Settings extends StatefulWidget {
   @override
@@ -26,7 +26,8 @@ class _SettingsState extends State<Settings> {
               children: <Widget>[
                 CircleAvatar(
                   radius: kSpacingUnit.w * 10,
-                  backgroundImage: NetworkImage('https://images.pexels.com/photos/2101841/pexels-photo-2101841.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'),
+                  backgroundImage: NetworkImage(
+                      'https://images.pexels.com/photos/2101841/pexels-photo-2101841.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'),
                 ),
               ],
             ),
@@ -42,7 +43,6 @@ class _SettingsState extends State<Settings> {
             style: kCaptionTextStyle,
           ),
           SizedBox(height: kSpacingUnit.w * 9),
-         
         ],
       ),
     );

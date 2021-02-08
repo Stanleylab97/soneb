@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:sbeepay/config/NetworkHandler.dart';
+import 'package:sonebpay/config/NetworkHandler.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -85,7 +85,7 @@ class _SignUpState extends State<SignUp> {
             flushbarStyle: FlushbarStyle.FLOATING,
             reverseAnimationCurve: Curves.decelerate,
             forwardAnimationCurve: Curves.elasticOut,
-            backgroundColor: Colors.red,
+            backgroundColor: Color.fromRGBO(0, 91, 171, 1),
             boxShadows: [
               BoxShadow(
                   color: Colors.blue[800],
@@ -342,7 +342,7 @@ class _SignUpState extends State<SignUp> {
                                   color: Colors.white,
                                   fontSize: 20.0,
                                   fontWeight: FontWeight.bold)),
-                      color: Colors.red,
+                      color: Color.fromRGBO(0, 91, 171, 1),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),

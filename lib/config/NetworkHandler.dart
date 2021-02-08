@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -7,7 +8,7 @@ import 'package:logger/logger.dart';
 
 class NetworkHandler {
   String baseurl =
-      "https://easier.donaconsult.com"; 
+      "http://easier.donaconsult.com"; 
   var log = Logger();
 
   FlutterSecureStorage storage = FlutterSecureStorage();

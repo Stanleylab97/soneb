@@ -1,7 +1,6 @@
-import 'package:sbeepay/config/constants.dart';
-import 'package:sbeepay/config/sizeConfig.dart';
+import 'package:sonebpay/config/constants.dart';
+import 'package:sonebpay/config/sizeConfig.dart';
 import 'package:flutter/material.dart';
-
 
 class DefaultButton extends StatelessWidget {
   const DefaultButton({
@@ -18,7 +17,8 @@ class DefaultButton extends StatelessWidget {
       width: double.infinity,
       height: getProportionateScreenHeight(56.0),
       child: FlatButton(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
         color: kPrimaryColor,
         onPressed: press,
         child: Text(

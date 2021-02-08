@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sbeepay/Models/facture.dart';
-import 'package:sbeepay/config/constants.dart';
-import 'package:sbeepay/widgets/invoice_body.dart';
+import 'package:sonebpay/Models/facture.dart';
+import 'package:sonebpay/config/constants.dart';
+import 'package:sonebpay/widgets/invoice_body.dart';
 
 class BillsScreen extends StatefulWidget {
   final Facture facture;
@@ -19,7 +19,10 @@ class _BillsScreenState extends State<BillsScreen> {
 
     return Scaffold(
       body: Column(
-        children: [invoiceHeader(), InvoiceBody(facturedetails: facture)],
+        children: [
+          invoiceHeader(),
+          InvoiceBody(facturedetails: widget.facture)
+        ],
       ),
     );
   }
@@ -39,15 +42,16 @@ class _BillsScreenState extends State<BillsScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Image.asset(
-                  "assets/images/logo.jpeg",
+                  "assets/images/logo.jpg",
                   width: 40,
                   height: 40,
                 ),
                 SizedBox(
                   width: ScreenConfig.getProportionalWidth(20),
                 ),
-                Text("SOCIETE BENINOISE D'ENERGIE ELECTRIQUE",
-                    style: TextStyle(color: Colors.pink[600], fontSize: 14))
+                Text("Société Nationale des Eaux du Bénin",
+                    style: TextStyle(
+                        color: Color.fromRGBO(0, 91, 171, 1), fontSize: 14))
               ],
             ),
             SizedBox(height: ScreenConfig.getProportionalHeight(35)),
@@ -55,7 +59,7 @@ class _BillsScreenState extends State<BillsScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Facture n° FE "+ widget.facture.numFact,
+                  "Facture n° FE " + widget.facture.numFact,
                   style: TextStyle(fontSize: 16),
                 ),
               ],
@@ -73,12 +77,14 @@ class _BillsScreenState extends State<BillsScreen> {
                       height: 2,
                     ),
                     Text(
-                      "Numéro Abonné: "+widget.facture.compteur.abonne.numAbonne,
+                      "Numéro Abonné: " +
+                          widget.facture.compteur.abonne.numAbonne,
                     ),
                     SizedBox(
                       height: 2,
                     ),
-                    Text("Catégorie: 01 "+widget.facture.compteur.abonne.category.libelle)
+                    Text("Catégorie: 01 " +
+                        widget.facture.compteur.abonne.category.libelle)
                   ],
                 ),
                 Column(
@@ -87,7 +93,7 @@ class _BillsScreenState extends State<BillsScreen> {
                     SizedBox(
                       height: 42,
                     ),
-                    Text("Client: "+widget.facture.compteur.abonne.nom)
+                    Text("Client: " + widget.facture.compteur.abonne.nom)
                   ],
                 ),
               ],

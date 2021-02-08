@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:sbeepay/Pages/sign_in.dart';
-import 'package:sbeepay/config/palette.dart';
-import 'package:sbeepay/Pages/BottomNavScreen.dart';
+import 'package:sonebpay/Pages/sign_in.dart';
+import 'package:sonebpay/config/palette.dart';
+import 'package:sonebpay/Pages/BottomNavScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -72,15 +72,13 @@ class _StartState extends State<Start> {
     User user = await _handleSignIn();
     var userSignedIn = await Navigator.push(
       context,
-      MaterialPageRoute(
-          builder: (context) => BottomNavScreen()),
+      MaterialPageRoute(builder: (context) => BottomNavScreen()),
     );
 
     setState(() {
       isUserSignedIn = userSignedIn == null ? true : false;
     });
   }
-
 
   navigateToLogin() async {
     Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
@@ -113,11 +111,11 @@ class _StartState extends State<Start> {
                         color: Colors.black),
                     children: <TextSpan>[
                   TextSpan(
-                      text: 'SBEEPAY',
+                      text: 'SONEB PAY',
                       style: TextStyle(
                           fontSize: 30.0,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red))
+                          color: Color.fromRGBO(0, 91, 171, 1)))
                 ])),
             SizedBox(height: 10.0),
             Text(
@@ -162,12 +160,12 @@ class _StartState extends State<Start> {
               ],
             ),
             SizedBox(height: 25.0),
-            SignInButton(
+            /* SignInButton(
               Buttons.Google,
               text: "Se connecter avec Google",
               onPressed:() {onGoogleSignIn(context);},
               elevation: 8.0,
-            )
+            ) */
           ],
         ),
       ),

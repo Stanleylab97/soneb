@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:sbeepay/config/MoMoRequests.dart';
-import 'package:sbeepay/config/constants.dart';
+import 'package:sonebpay/config/MoMoRequests.dart';
+import 'package:sonebpay/config/constants.dart';
+import 'package:sonebpay/widgets/custom_dialog.dart';
 
 class PaymentsMethods extends StatefulWidget {
   @override
@@ -29,11 +32,11 @@ class _PaymentsMethodsState extends State<PaymentsMethods> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                         Icon(Icons.arrow_back_ios,
-                            size: 18, color: Colors.orange),
+                            size: 18, color: Color.fromRGBO(0, 91, 171, 1)),
                         Text('Retour',
                             style: TextStyle(
                                 fontSize: 16.0,
-                                color: Colors.orange,
+                                color: Color.fromRGBO(0, 91, 171, 1),
                                 fontWeight: FontWeight.w600))
                       ])),
                   Flexible(
@@ -53,39 +56,122 @@ class _PaymentsMethodsState extends State<PaymentsMethods> {
               Flexible(
                 fit: FlexFit.tight,
                 child: Column(children: <Widget>[
+                  SizedBox(
+                    height: 100,
+                  ),
+                  Text(
+                    'Moyens mobiles',
+                    style:
+                        TextStyle(fontSize: 18.0, fontWeight: FontWeight.w600),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Flexible(
                       flex: 2,
                       child: Row(
-
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Flexible(
-                            child: Image.asset(
-                              "assets/images/mtn.jpeg",
-                               fit: BoxFit.fill
+                              child: InkWell(
+                            onTap: () {
+                              _displayDialogGSM(context, 1);
+                            },
+                            child: Container(
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(5.0),
+                                child: Image.asset("assets/images/mtn.jpeg",
+                                    width: 160, height: 90, fit: BoxFit.fill),
+                              ),
                             ),
-                          ),
-                          Flexible(
-                            child: Image.asset(
-                              "assets/images/moov.jpg",
-                              width: 120, height: 90, fit: BoxFit.fill
+                          )),
+                         Flexible(
+                              child: InkWell(
+                            onTap: () {
+                              _displayDialogGSM(context, 2);
+                            },
+                            child: Container(
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(5.0),
+                                child: Image.asset("assets/images/moov.jpg",
+                                    width: 160, height: 90, fit: BoxFit.fill),
+                              ),
                             ),
-                          ),
+                          )),
                         ],
                       )),
-                  Flexible(
-                      flex: 2,
-                      child: Center(
-                          child: Image.asset(
-                        "assets/images/moov.jpg",
-                        fit: BoxFit.fitWidth,
-                      ))),
-                  Flexible(
-                      flex: 2,
-                      child: Center(
-                          child: Image.asset(
-                        "assets/images/moov.jpg",
-                        fit: BoxFit.fitWidth,
-                      ))),
+                  SizedBox(height: 70),
+                  Text(
+                    'Banques partenaires',
+                    style:
+                        TextStyle(fontSize: 18.0, fontWeight: FontWeight.w600),
+                  ),
+                  SizedBox(height: 30),
+                  Container(
+                    height: 100,
+                    margin: EdgeInsets.all(6),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Flexible(
+                            child: Container(
+                                margin: EdgeInsets.all(6),
+                                child: InkWell(
+                                  onTap: () {
+                                    _displayDialogBank(context, 1);
+                                  },
+                                  child: Container(
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(5.0),
+                                      child: Image.asset(
+                                          "assets/images/uba.png",
+                                          height: 90,
+                                          fit: BoxFit.fill),
+                                    ),
+                                  ),
+                                ))),
+                        Flexible(
+                            child: Container(
+                                margin: EdgeInsets.all(6),
+                                child: InkWell(
+                                  onTap: () {
+                                    _displayDialogBank(context, 2);
+                                  },
+                                  child: Container(
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(5.0),
+                                      child: Image.asset(
+                                          "assets/images/boa.jpg",
+                                          height: 90,
+                                          fit: BoxFit.fill),
+                                    ),
+                                  ),
+                                ))),
+                        Flexible(
+                            child: Container(
+                                margin: EdgeInsets.all(6),
+                                child: InkWell(
+                                  onTap: () {
+                                    _displayDialogBank(context, 3);
+                                  },
+                                  child: Container(
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(5.0),
+                                      child: Image.asset(
+                                          "assets/images/ecobank.jpg",
+                                          height: 90,
+                                          fit: BoxFit.fill),
+                                    ),
+                                  ),
+                                ))),
+                      ],
+                    ),
+                  ),
+                  Container(
+                      height: 20,
+                      child: Row(
+                        children: [],
+                      ))
                 ]),
               )
             ])));
@@ -202,7 +288,7 @@ class _PaymentsMethodsState extends State<PaymentsMethods> {
     )); */
   }
 
-  _displayDialog(BuildContext context, int i) async {
+  _displayDialogGSM(BuildContext context, int i) async {
     return showDialog(
         context: context,
         builder: (context) {
@@ -220,6 +306,17 @@ class _PaymentsMethodsState extends State<PaymentsMethods> {
                 child: new Text('Payer'),
                 onPressed: () {
                   Navigator.of(context).pop();
+
+                  showDialog(
+                      context: context,
+                      builder: (context) => CustomDialog(
+                          title: "Bravo",
+                          description:
+                              "Vous venez de payer votre facture par le biais de ALL PAY",
+                          buttonText: "OK",
+                          image: "assets/images/logo.gif"));
+
+                          Navigator.of(context).pop();
                 },
               )
             ],
@@ -227,6 +324,8 @@ class _PaymentsMethodsState extends State<PaymentsMethods> {
         });
   }
 }
+
+_displayDialogBank(BuildContext context, int i) async {}
 /*  showDialog(
                     context: context,
                     builder: (BuildContext context) {

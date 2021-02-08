@@ -1,12 +1,12 @@
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:flushbar/flushbar.dart';
 import "package:flutter/material.dart";
-import 'package:sbeepay/Models/facture.dart';
-import 'package:sbeepay/Pages/PaymentsMethods.dart';
-import 'package:sbeepay/Pages/screens.dart';
-import 'package:sbeepay/config/MoMoRequests.dart';
-import 'package:sbeepay/config/NetworkHandler.dart';
-import 'package:sbeepay/config/constants.dart';
+import 'package:sonebpay/Models/facture.dart';
+import 'package:sonebpay/Pages/PaymentsMethods.dart';
+import 'package:sonebpay/Pages/screens.dart';
+import 'package:sonebpay/config/MoMoRequests.dart';
+import 'package:sonebpay/config/NetworkHandler.dart';
+import 'package:sonebpay/config/constants.dart';
 import 'package:uuid/uuid.dart';
 
 class InvoiceBody extends StatelessWidget {
@@ -32,7 +32,11 @@ class InvoiceBody extends StatelessWidget {
             Card(
               elevation: 1,
               child: Column(
-                children: [titre1(), SousDetail1(facturedetails.compteur.numPolice, int.parse(facturedetails.montantFact) )],
+                children: [
+                  titre1(),
+                  SousDetail1(facturedetails.compteur.numPolice,
+                      int.parse(facturedetails.montantFact))
+                ],
               ),
             ),
             SizedBox(
@@ -41,7 +45,11 @@ class InvoiceBody extends StatelessWidget {
             Card(
               elevation: 1,
               child: Column(
-                children: [titre2(), SousDetail2(facturedetails.lastIndex, facturedetails.newIndex, facturedetails.nbkwh, "B09")],
+                children: [
+                  titre2(),
+                  SousDetail2(facturedetails.lastIndex, facturedetails.newIndex,
+                      facturedetails.nbkwh, "B09")
+                ],
               ),
             ),
             SizedBox(
@@ -52,7 +60,7 @@ class InvoiceBody extends StatelessWidget {
               height: ScreenConfig.getProportionalHeight(56),
             ),
             FlatButton(
-              color: Colors.pink[600],
+              color: Color.fromRGBO(0, 91, 171, 1),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15)),
               child: SizedBox(
@@ -78,16 +86,14 @@ class InvoiceBody extends StatelessWidget {
                 ),
               ),
               onPressed: () async {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => PaymentsMethods()));
-
-                
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => PaymentsMethods()));
               },
             ),
             SizedBox(
               height: ScreenConfig.getProportionalHeight(37),
             ),
-            Text("A payer avant le: "+facturedetails.periode.dateEcheance)
+            Text("A payer avant le: " + facturedetails.periode.dateEcheance)
           ],
         ),
       ),
@@ -102,7 +108,7 @@ class InvoiceBody extends StatelessWidget {
           width: 150,
           padding: EdgeInsets.only(top: 15, bottom: 15),
           height: 50,
-          color: Colors.pink[600],
+          color: Color.fromRGBO(24, 117, 154, 1),
           child: Center(
             child: Text(
               "NUMERO DE POLICE",
@@ -114,7 +120,7 @@ class InvoiceBody extends StatelessWidget {
           width: 150,
           padding: EdgeInsets.only(top: 15, bottom: 15),
           height: 50,
-          color: Colors.pink[600],
+          color: Color.fromRGBO(24, 117, 154, 1),
           child: Center(
             child: Text(
               "MONTANT A PAYER",
@@ -134,7 +140,7 @@ class InvoiceBody extends StatelessWidget {
           width: 75,
           padding: EdgeInsets.only(top: 15, bottom: 15),
           height: 50,
-          color: Colors.pink[600],
+          color: Color.fromRGBO(24, 117, 154, 1),
           child: Center(
             child: Text(
               "ANCIEN",
@@ -146,7 +152,7 @@ class InvoiceBody extends StatelessWidget {
           width: 74,
           padding: EdgeInsets.only(top: 15, bottom: 15),
           height: 50,
-          color: Colors.pink[600],
+          color: Color.fromRGBO(24, 117, 154, 1),
           child: Center(
             child: Text(
               "NOUVEAU",
@@ -158,7 +164,7 @@ class InvoiceBody extends StatelessWidget {
           padding: EdgeInsets.only(top: 15, bottom: 15),
           width: 79,
           height: 50,
-          color: Colors.pink[600],
+          color: Color.fromRGBO(24, 117, 154, 1),
           child: Center(
             child: Text(
               "TOTAL(Kwh)",
@@ -170,7 +176,7 @@ class InvoiceBody extends StatelessWidget {
           width: 87,
           padding: EdgeInsets.only(top: 15, bottom: 15),
           height: 50,
-          color: Colors.pink[600],
+          color: Color.fromRGBO(24, 117, 154, 1),
           child: Center(
             child: Text(
               "Tranche(Kwh)",
@@ -188,7 +194,7 @@ class InvoiceBody extends StatelessWidget {
       children: [
         Container(
           height: ScreenConfig.getProportionalHeight(100),
-          color: Colors.pink[200],
+          color: Colors.grey[300],
           child: Row(
             children: [
               Text(
@@ -264,8 +270,6 @@ class InvoiceBody extends StatelessWidget {
       ),
     );
   }
-
-  
 }
 
 class SousDetail1 extends StatelessWidget {
@@ -280,7 +284,7 @@ class SousDetail1 extends StatelessWidget {
         width: 150,
         padding: EdgeInsets.only(top: 15, bottom: 15),
         height: 50,
-        color: Colors.pink[200],
+        color: Colors.grey[300],
         child: Center(
           child: Text(
             numCompteur,
@@ -292,7 +296,7 @@ class SousDetail1 extends StatelessWidget {
         width: 150,
         padding: EdgeInsets.only(top: 15, bottom: 15),
         height: 50,
-        color: Colors.pink[200],
+        color: Colors.grey[300],
         child: Center(
           child: Text(
             "$montFact",
@@ -316,7 +320,7 @@ class SousDetail2 extends StatelessWidget {
         width: 75,
         padding: EdgeInsets.only(top: 15, bottom: 15),
         height: 50,
-        color: Colors.pink[200],
+        color: Colors.grey[300],
         child: Center(
           child: Text(
             "$lastIndex",
@@ -328,7 +332,7 @@ class SousDetail2 extends StatelessWidget {
         width: 74,
         padding: EdgeInsets.only(top: 15, bottom: 15),
         height: 50,
-        color: Colors.pink[200],
+        color: Colors.grey[300],
         child: Center(
           child: Text(
             "$newIndex",
@@ -340,7 +344,7 @@ class SousDetail2 extends StatelessWidget {
         width: 79,
         padding: EdgeInsets.only(top: 15, bottom: 15),
         height: 50,
-        color: Colors.pink[200],
+        color: Colors.grey[300],
         child: Center(
           child: Text(
             "$nbkwh",
@@ -352,7 +356,7 @@ class SousDetail2 extends StatelessWidget {
         width: 87,
         padding: EdgeInsets.only(top: 15, bottom: 15),
         height: 50,
-        color: Colors.pink[200],
+        color: Colors.grey[300],
         child: Center(
           child: Text(
             tranche,

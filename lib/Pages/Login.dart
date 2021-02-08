@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:sbeepay/config/NetworkHandler.dart';
-import 'package:sbeepay/config/palette.dart';
+import 'package:sonebpay/config/NetworkHandler.dart';
+import 'package:sonebpay/config/palette.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +38,7 @@ class _LoginState extends State<Login> {
         "email": _email.text.trim(),
         "password": _password.text.trim()
       };
-         }
+    }
   }
 
   showError(String errormessage) {
@@ -171,7 +171,7 @@ class _LoginState extends State<Login> {
                                   color: Colors.white,
                                   fontSize: 20.0,
                                   fontWeight: FontWeight.bold)),
-                      color: Colors.red,
+                      color: Color.fromRGBO(0, 91, 171, 1),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),

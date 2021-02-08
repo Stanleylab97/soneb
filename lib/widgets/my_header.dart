@@ -1,9 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:sbeepay/config/constants.dart';
-import 'package:sbeepay/config/palette.dart';
-import 'package:sbeepay/Pages/BottomNavScreen.dart';
+import 'package:sonebpay/config/constants.dart';
+import 'package:sonebpay/config/palette.dart';
+import 'package:sonebpay/Pages/BottomNavScreen.dart';
 import 'package:flutter/material.dart';
-
 
 class MyHeader extends StatefulWidget {
   final String image;
@@ -69,16 +68,14 @@ class _MyHeaderState extends State<MyHeader> {
                       alignment: Alignment.topCenter,
                     ),
                   ),
-                 
+
                   Positioned(
                     top: 20 - widget.offset / 2,
                     left: 100,
                     child: Text(
                       "${widget.textTop} \n${widget.textBottom}",
                       style: kHeadingTextStyle.copyWith(
-                        color: Colors.white,
-                        fontSize: 19.0
-                      ),
+                          color: Colors.white, fontSize: 19.0),
                     ),
                   ),
                   Container(), // I dont know why it can't work without container
