@@ -8,13 +8,42 @@ import 'package:sonebpay/config/MoMoRequests.dart';
 import 'package:sonebpay/config/NetworkHandler.dart';
 import 'package:sonebpay/config/constants.dart';
 import 'package:uuid/uuid.dart';
+import 'package:kkiapay_flutter_sdk/kkiapayWebview.dart';
+import 'package:kkiapay_flutter_sdk/kkiapayConf.sample.dart';
+
+//import 'package:kkiapay_flutter_sdk/utils/Kkiapay.dart';
 
 class InvoiceBody extends StatelessWidget {
   final Facture facturedetails;
 
   InvoiceBody({this.facturedetails});
+
   @override
   Widget build(BuildContext context) {
+    void sucessCallback(response, context) {
+      print(response);
+      //Navigator.pop(context);
+      /*   Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => SuccessScreen(
+              amount: response['amount'],
+              transactionId: response['transactionId'],
+            ),
+          ),
+        ); */
+    }
+
+    final kkiapay = KKiaPay(
+      amount: int.parse(facturedetails.montantFact),
+      phone: '97000000',
+      data: 'FE3365848',
+      sandbox: true,
+      apikey: 'cd3704b012ce11ebbbaacd454d4b7360',
+      callback: sucessCallback,
+      name: 'JOHN DOE',
+      theme: "#E30E25",
+    );
     var totalAmount = facturedetails.montantFact;
     double height =
         ScreenConfig.deviceHeight - ScreenConfig.getProportionalHeight(374);
@@ -59,36 +88,22 @@ class InvoiceBody extends StatelessWidget {
             SizedBox(
               height: ScreenConfig.getProportionalHeight(56),
             ),
-            FlatButton(
-              color: Color.fromRGBO(0, 91, 171, 1),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15)),
-              child: SizedBox(
-                height: ScreenConfig.getProportionalHeight(80),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.payments,
-                      color: Colors.white,
-                    ),
-                    SizedBox(
-                      width: ScreenConfig.getProportionalWidth(21),
-                    ),
-                    Text(
-                      "Payer maintenant",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: ScreenConfig.getProportionalHeight(27),
-                          fontWeight: FontWeight.bold),
-                    )
-                  ],
+            ButtonTheme(
+              minWidth: 250.0,
+              height: 60.0,
+              child: FlatButton(
+                color: Color(0xFFE30E25),
+                child: Text(
+                  'Payer maintenant',
+                  style: TextStyle(color: Colors.white),
                 ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => kkiapay),
+                  );
+                },
               ),
-              onPressed: () async {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => PaymentsMethods()));
-              },
             ),
             SizedBox(
               height: ScreenConfig.getProportionalHeight(37),

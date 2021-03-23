@@ -94,7 +94,7 @@ Widget _buildHeader(double screenHeight, BuildContext context) {
         Row(
           children: <Widget>[
             Text(
-              "Bienvenue à la SONEB",
+              "Bienvenue à la SBEE",
               style: const TextStyle(
                   color: Colors.white,
                   fontSize: 25.0,
@@ -105,7 +105,7 @@ Widget _buildHeader(double screenHeight, BuildContext context) {
         SizedBox(height: screenHeight * 0.02),
         Column(
           children: <Widget>[
-            Text('Société Nationale des Eaux du Bénin',
+            Text('Société Béninoise d\'Energie électrique',
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 18.0,
@@ -162,7 +162,7 @@ Widget _buildMessage(double screenHeight) {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text("La SONEB",
+            Text("La SBEE",
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 18.0,

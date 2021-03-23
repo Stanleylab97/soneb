@@ -3,6 +3,7 @@ import 'package:sonebpay/Models/facture.dart';
 import 'package:sonebpay/config/constants.dart';
 import 'package:sonebpay/widgets/invoice_body.dart';
 
+
 class BillsScreen extends StatefulWidget {
   final Facture facture;
 
@@ -12,7 +13,9 @@ class BillsScreen extends StatefulWidget {
   _BillsScreenState createState() => _BillsScreenState();
 }
 
+
 class _BillsScreenState extends State<BillsScreen> {
+
   @override
   Widget build(BuildContext context) {
     ScreenConfig.init(context);
@@ -49,7 +52,7 @@ class _BillsScreenState extends State<BillsScreen> {
                 SizedBox(
                   width: ScreenConfig.getProportionalWidth(20),
                 ),
-                Text("Société Nationale des Eaux du Bénin",
+                Text("Société Béninoise d'Energie Electrique",
                     style: TextStyle(
                         color: Color.fromRGBO(0, 91, 171, 1), fontSize: 14))
               ],
